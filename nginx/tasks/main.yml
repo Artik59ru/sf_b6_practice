@@ -12,8 +12,7 @@
     state: absent
 
 - name: Add new default site config
-  copy:
-    src: /etc/ansible/roles/nginx/files/default
-    dest: /etc/nginx/sites-available/default
-    remote_src: yes
+  copy:    
+    src: /etc/ansible/roles/nginx/files/my_default.conf
+    dest: /etc/nginx/sites-available/default    
   notify: reload_nginx
