@@ -1,2 +1,7 @@
 ---
 # handlers file for phpfpm
+ - name: restart phpfpm
+   listen: restart_phpfpm
+   service: 
+     name: php7.4-fpm
+     state: restarted

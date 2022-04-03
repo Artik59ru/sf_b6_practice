@@ -1,2 +1,28 @@
 ---
 # tasks file for phpfpm
+- name: Install php-fpm
+  apt:
+    state: present
+    pkg:
+    - php7.4 
+    - php7.4-cli
+    - php7.4-fpm
+    - php7.4-json
+    - php7.4-pdo
+    - php7.4-mysql
+    - php7.4-zip 
+    - php7.4-gd
+    - php7.4-mbstring
+    - php7.4-curl
+    - php7.4-xml
+    - php-pear 
+    - php7.4-bcmath
+
+- name: Listen on 9000
+  lineinfile:
+    dest: /etc/php/7.4/fpm/pool.d/www.conf
+    regexp: 'listen = /run/php/php7.4-fpm.sock'
+    insertbefore: BOF
+    line: 'listen = 192.168.0.120:9000'
+  notify: restart_phpfpm
+    

@@ -1,2 +1,19 @@
 ---
 # tasks file for nginx
+- name: Install NGINX
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Remove default site config
+  file:
+    path: /etc/nginx/sites-available/default
+    state: absent
+
+- name: Add new default site config
+  copy:
+    src: /etc/ansible/roles/nginx/files/default
+    dest: /etc/nginx/sites-available/default
+    remote_src: yes
+  notify: reload_nginx
